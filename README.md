@@ -1,151 +1,117 @@
 <p align="center">
-  <img src="https://i.imgur.com/your-terminal-screenshot.png" alt="output" width="800">
+<img width="1024" height="484" alt="image" src="https://github.com/user-attachments/assets/26980094-0ec6-439d-832f-eec2503dc851" />
 </p>
-
-</br>
 </br>
 
 > [!TIP]
-> **Operational Guidance:**
+> **Scanning Tip:**
 >
-> - Feed this tool with massive lists of IPs harvested from Shodan or Censys for optimal results in bug bounty hunting.
-> - Ensure you have `wafw00f` and `dig` installed in your environment before running the scan.
-> - Adjust the `sleep` duration in Phase III if you detect aggressive blocking from your scanning source.
+> - Use this tool after harvesting potential IP ranges from Shodan, Censys, or FOFA.
+> - Ensure `openssl`, `dig`, and `wafw00f` are installed and available in your PATH.
+> - If you receive too many "No Response" errors, consider increasing the `timeout` value in the `openssl` command.
 
 </br>
 </br>
 
-### TO-DO
+### 6. TO-DO
 
-* [ ] Add multi-threading support for parallel processing of IP lists.
-* [ ] Integrate automated Shodan/Censys lookup for potential origin IPs.
-* [ ] Add automated screenshots of confirmed origin endpoints.
+* [ ] Add JSON output format for easier integration with other tools.
+* [ ] Implement CIDR range expansion for scanning entire subnets.
+* [ ] Add support for custom User-Agent lists.
 
 </br>
 </br>
 
 > [!CAUTION]
-> **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized bypassing of security measures is strictly prohibited. The authors and project accept no responsibility for misuse of this tool.**
-
----
-
-### **Generated Banner Image**
-
-<p align="center">
-  <img src="https://i.imgur.com/your-generated-banner.png" alt="GeneratedHere is the professional `README.md` for the provided tool, followed by the requested banner image.
-
----
-
-### **Origin Mapper (ip2sub)**
-
-<p align="center">
-  <img src="https://i.imgur.com/G5iM8B4.png" alt="banner" width="600">
-</p>
+> **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized scanning or bypassing of security controls is strictly prohibited. The authors are not responsible for any misuse.**## Origin Mapper (ip2sub)
 
 > [!NOTE]
-> **Origin Mapper** is an autonomous intelligence tool designed to bypass Cloud WAF/CDN services by identifying a domain's real **Origin IP address** via passive SSL examination, forced HTTP status checks, and stealthy WAF detection.
+> **Origin Mapper** is a high-stealth reconnaissance tool designed to unmask the real backend servers (Origin IPs) behind Cloud WAFs and CDNs by correlating IP addresses with SSL certificates and DNS records.
 
 </br>
 </br>
 
-### Features
+### 1. Features
 
-* **Autonomous Discovery:** Automatically harvests potential hostnames associated with an IP via Reverse DNS (PTR records).
-* **SSL/TLS SAN Extraction:** Robustly extracts Subject Alternative Names from SSL certificates, identifying all domains the server intends to host.
-* **WAF Bypass Verification:** Uses `wafw00f` to passively verify if the identified IP is a protected CDN/Proxy edge or the direct backend origin.
-* **HTTP Force Checking:** Validates the association between the IP and extracted domains by forcing the `Host` header via HTTPS.
-* **Built-in Stealth:** Features adjustable jitter and custom User-Agents to remain undetected during large-scale scans.
+* **SSL SAN Extraction:** Automatically harvests all domains hosted on a server by parsing Subject Alternative Names from the SSL certificate[cite: 2].
+* **Reverse DNS Intelligence:** Leverages `dig` to pull PTR records and identify server ownership[cite: 2].
+* **WAF Verification:** Integrates with `wafw00f` to confirm if a target IP is a direct origin or a protected edge server[cite: 2].
+* **Stealth Jitter:** Implements randomized sleep intervals between requests to evade behavioral detection[cite: 2].
 
 </br>
 </br>
 
-### Installation
-
-Clone the repository and ensure the script `origin_mapper.sh` has execution permissions:
+### 2. Installation
 ```bash
-git clone [https://github.com/muhammadtaharana/ip2sub](https://github.com/muhammadtaharana/ip2sub)
+# Clone the repository
+git clone https://github.com/muhammadtaharana/ip2sub
+
+# Navigate to the directory
 cd ip2sub
+
+# Grant execution permissions
 chmod +x ip2sub.sh
 ```
 
 </br>
 </br>
 
-### Execution Workflow
+### 3. Logic Flow
 
-The script operates in a three-phase detection cycle for every IP address input:
+The engine processes each IP through a sequential verification pipeline[cite: 2]:
 
-| Phase | Description |
-| :--- | :--- |
-| **I: Harvesting** | Pulls domains from Reverse DNS (PTR) and the SSL Certificate (SAN). |
-| **II: Validation** | Executes a `curl` request, forcing the Host header, looking for 200/300 status codes. |
-| **III: Verification** | If successful, runs `wafw00f` to confirm the target is unprotected by a Cloud WAF. |
+1.  **Harvesting:** Pulls hostnames from Reverse DNS and SSL certificates[cite: 2].
+2.  **Association Check:** Attempts to access the IP using forced `Host` headers[cite: 2].
+3.  **WAF Analysis:** Checks the identified IP for the presence of a Firewall[cite: 2].
+4.  **Reporting:** Logs confirmed Origin-to-Domain mappings to a results file[cite: 2].
 
 </br>
 </br>
 
-### Usage Examples
+### 4. Usage
 
-- ###### Run the mapper on a list of IPs
+To begin the discovery process, provide a file containing a list of target IP addresses:
+
 ```bash
 ./ip2sub.sh ips.txt
 ```
 
-- ###### Map results and count hits
-```bash
-./ip2sub.sh raw_ips.txt && wc -l origin_results.txt
-```
-
 </br>
 </br>
 
-### Output Structure
+### 5. Output structure
 
-Confirmed Origin IPs are saved to `origin_results.txt` in the following format:
+Results are streamed to the terminal in real-time and saved to `origin_results.txt` for further analysis[cite: 2]:
 
 ```text
-[!] 93.184.216.34 is the ORIGIN for example.com (Status: 200)
-[!] 1.1.1.1 is the ORIGIN for one.one.one.one (Status: 301)
+🌐 [Scanning IP: 1.2.3.4]
+    [*] Harvesting hostnames...
+    [*] Checking association with target.com... [ORIGIN FOUND]
+[!] 1.2.3.4 is the ORIGIN for target.com (Status: 200)
 ```
-
-Terminal output is color-coded to highlight successful matches:
-
-<p align="center">
-  <img src="https://i.imgur.com/your-terminal-screenshot.png" alt="output" width="800">
-</p>
 
 </br>
 </br>
 
 > [!TIP]
-> **Operational Guidance:**
+> **Scanning Tip:**
 >
-> - Feed this tool with massive lists of IPs harvested from Shodan or Censys for optimal results in bug bounty hunting.
-> - Ensure you have `wafw00f` and `dig` installed in your environment before running the scan.
-> - Adjust the `sleep` duration in Phase III if you detect aggressive blocking from your scanning source.
+> - Use this tool after harvesting potential IP ranges from Shodan, Censys, or FOFA.
+> - Ensure `openssl`, `dig`, and `wafw00f` are installed and available in your PATH.
+> - If you receive too many "No Response" errors, consider increasing the `timeout` value in the `openssl` command.
 
 </br>
 </br>
 
-### TO-DO
+### 6. TO-DO
 
-* [ ] Add multi-threading support for parallel processing of IP lists.
-* [ ] Integrate automated Shodan/Censys lookup for potential origin IPs.
-* [ ] Add automated screenshots of confirmed origin endpoints.
+* [ ] Add JSON output format for easier integration with other tools.
+* [ ] Implement CIDR range expansion for scanning entire subnets.
+* [ ] Add support for custom User-Agent lists.
 
 </br>
 </br>
 
 > [!CAUTION]
-> **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized bypassing of security measures is strictly prohibited. The authors and project accept no responsibility for misuse of this tool.**
-
----
-
-### **Generated Banner Image**
-
-<p align="center">
-  <img src="https://i.imgur.com/your-generated-banner.png" alt="Generated Banner" width="600">
-</p>
-
-This banner matches the requested pixelated, dark-mode aesthetic.
+> **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized scanning or bypassing of security controls is strictly prohibited. The authors are not responsible for any misuse.**[cite: 2]
 ```
