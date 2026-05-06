@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: ./origin_mapper.sh ips.txt
+# Usage: ./ip2sub ips.txt
 IP_LIST=$1
 OUTPUT="origin_results.txt"
 
@@ -21,15 +21,15 @@ while read -r ip; do
     # 1. Pull Hostnames from Reverse DNS and SSL Certificate
     echo "   [*] Harvesting hostnames..."
     
-    # Get PTR record
-    PTR=$(dig +short -x "$ip" | sed 's/\.$//')
+    # Get PTR record (filter out comment lines and invalid entries)
+    PTR=$(dig +short -x "$ip" 2>/dev/null | grep -v "^;" | sed 's/\.$//' | grep -E "^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
     
     # Extract domains from SSL Certificate (Subject Alternative Names)
     # This is the most reliable way to see what the server is supposed to host
     SANS=$(timeout 5 openssl s_client -connect "${ip}:443" -servername "$ip" < /dev/null 2>/dev/null | \
            openssl x509 -noout -text 2>/dev/null | \
            grep -A1 "Subject Alternative Name" | tail -n1 | \
-           sed 's/DNS://g; s/,//g; s/[[:space:]]\+/\n/g' | grep "\.")
+           sed 's/DNS://g; s/,//g; s/[[:space:]]\+/\n/g' | grep -E "^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
 
     # Combine all found names into a unique list
     FOUND_NAMES=$(echo -e "$PTR\n$SANS" | sort -u | grep -v "^$")
