@@ -3,12 +3,18 @@
 </p>
 </br>
 
+> [!NOTE]
+> **Origin Mapper** is a high-stealth reconnaissance tool designed to unmask the real backend servers (Origin IPs) behind Cloud WAFs and CDNs by correlating IP addresses with SSL certificates and DNS records.
+
 > [!TIP]
 > **Scanning Tip:**
 >
 > - Use this tool after harvesting potential IP ranges from Shodan, Censys, or FOFA.
 > - Ensure `openssl`, `dig`, and `wafw00f` are installed and available in your PATH.
 > - If you receive too many "No Response" errors, consider increasing the `timeout` value in the `openssl` command.
+
+> [!CAUTION]
+> **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized scanning or bypassing of security controls is strictly prohibited. The authors are not responsible for any misuse.**## Origin Mapper (ip2sub)
 
 </br>
 </br>
@@ -21,12 +27,6 @@
 
 </br>
 </br>
-
-> [!CAUTION]
-> **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized scanning or bypassing of security controls is strictly prohibited. The authors are not responsible for any misuse.**## Origin Mapper (ip2sub)
-
-> [!NOTE]
-> **Origin Mapper** is a high-stealth reconnaissance tool designed to unmask the real backend servers (Origin IPs) behind Cloud WAFs and CDNs by correlating IP addresses with SSL certificates and DNS records.
 
 </br>
 </br>
@@ -113,5 +113,4 @@ Results are streamed to the terminal in real-time and saved to `origin_results.t
 </br>
 
 > [!CAUTION]
-> **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized scanning or bypassing of security controls is strictly prohibited. The authors are not responsible for any misuse.**[cite: 2]
-```
+> **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized scanning or bypassing of security controls is strictly prohibited. The authors are not responsible for any misuse.**
