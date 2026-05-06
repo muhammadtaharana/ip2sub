@@ -94,6 +94,7 @@ Results are streamed to the terminal in real-time and saved to `origin_results.t
 
 ### 6. Future Enhancements.
 
+* [x] Added Install.sh script: Automated system-wide installation to /usr/local/bin.
 * [ ] Add JSON output format for easier integration with other tools.
 * [ ] Implement CIDR range expansion for scanning entire subnets.
 * [ ] Add support for custom User-Agent lists.
