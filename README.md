@@ -17,19 +17,6 @@
 > **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized scanning or bypassing of security controls is strictly prohibited. The authors are not responsible for any misuse.**## Origin Mapper (ip2sub)
 
 </br>
-</br>
-
-### 6. TO-DO
-
-* [ ] Add JSON output format for easier integration with other tools.
-* [ ] Implement CIDR range expansion for scanning entire subnets.
-* [ ] Add support for custom User-Agent lists.
-
-</br>
-</br>
-
-</br>
-</br>
 
 ### 1. Features
 
@@ -38,7 +25,6 @@
 * **WAF Verification:** Integrates with `wafw00f` to confirm if a target IP is a direct origin or a protected edge server[cite: 2].
 * **Stealth Jitter:** Implements randomized sleep intervals between requests to evade behavioral detection[cite: 2].
 
-</br>
 </br>
 
 ### 2. Installation
@@ -54,7 +40,6 @@ chmod +x ip2sub.sh
 ```
 
 </br>
-</br>
 
 ### 3. Logic Flow
 
@@ -66,7 +51,6 @@ The engine processes each IP through a sequential verification pipeline[cite: 2]
 4.  **Reporting:** Logs confirmed Origin-to-Domain mappings to a results file[cite: 2].
 
 </br>
-</br>
 
 ### 4. Usage
 
@@ -76,7 +60,7 @@ To begin the discovery process, provide a file containing a list of target IP ad
 ./ip2sub.sh ips.txt
 ```
 
-</br>
+Where `ips.txt` is a newline-separated list of IP addresses to scan. The script will output findings in real-time and save them to `origin_results.txt` for later review.
 </br>
 
 ### 5. Output structure
@@ -91,7 +75,6 @@ Results are streamed to the terminal in real-time and saved to `origin_results.t
 ```
 
 </br>
-</br>
 
 > [!TIP]
 > **Scanning Tip:**
@@ -100,7 +83,6 @@ Results are streamed to the terminal in real-time and saved to `origin_results.t
 > - Ensure `openssl`, `dig`, and `wafw00f` are installed and available in your PATH.
 > - If you receive too many "No Response" errors, consider increasing the `timeout` value in the `openssl` command.
 
-</br>
 </br>
 
 ### 6. TO-DO
@@ -151,7 +133,6 @@ Results are streamed to the terminal in real-time and saved to `origin_results.t
 * [ ] CDN evasion and de-anonymization techniques.
 * [ ] Network timing analysis for origin detection.
 
-</br>
 </br>
 
 > [!CAUTION]
