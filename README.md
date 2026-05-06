@@ -14,7 +14,9 @@
 > - If you receive too many "No Response" errors, consider increasing the `timeout` value in the `openssl` command.
 
 > [!CAUTION]
-> **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized scanning or bypassing of security controls is strictly prohibited. The authors are not responsible for any misuse.**## Origin Mapper (ip2sub)
+> **Use Origin Mapper only on assets you have explicit permission to test. Unauthorized scanning or bypassing of security controls is strictly prohibited. The authors are not responsible for any misuse.
+
+> **## Origin Mapper (ip2sub)
 
 </br>
 
@@ -28,6 +30,8 @@
 </br>
 
 ### 2. Installation
+
+#### Option 1: System-Wide Installation (Recommended)
 ```bash
 # Clone the repository
 git clone https://github.com/muhammadtaharana/ip2sub
@@ -35,8 +39,11 @@ git clone https://github.com/muhammadtaharana/ip2sub
 # Navigate to the directory
 cd ip2sub
 
-# Grant execution permissions
-chmod +x ip2sub.sh
+# Run the installation script
+sudo ./install.sh
+
+# Now you can run from anywhere
+ip2sub ips.txt
 ```
 
 </br>
