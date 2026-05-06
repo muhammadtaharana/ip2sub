@@ -108,6 +108,48 @@ Results are streamed to the terminal in real-time and saved to `origin_results.t
 * [ ] Add JSON output format for easier integration with other tools.
 * [ ] Implement CIDR range expansion for scanning entire subnets.
 * [ ] Add support for custom User-Agent lists.
+* [ ] Implement concurrent scanning for faster processing of large IP lists.
+* [ ] Add IPv6 support for next-generation IP scanning.
+* [ ] Export results in multiple formats (CSV, XML, JSON Lines).
+* [ ] Implement caching mechanism to avoid re-scanning known IPs.
+* [ ] Add verbosity levels for detailed logging and debugging.
+* [ ] Integrate with Shodan/Censys API for automatic IP harvesting.
+* [ ] Proxy/VPN detection for identified origin servers.
+* [ ] Add performance metrics and scanning statistics reporting.
+* [ ] Create a configuration file for customizable scan parameters.
+* [ ] Implement retry logic for failed requests with exponential backoff.
+* [ ] Add support for scanning from a list of CIDR ranges.
+* [ ] Geolocation mapping and geographic clustering of origin servers.
+* [ ] ASN enumeration and network topology reconstruction.
+* [ ] Historical DNS records retrieval and analysis (Certificate Transparency logs).
+* [ ] SSL/TLS certificate chain analysis and historical tracking.
+* [ ] Technology stack fingerprinting (CMS, frameworks, server software).
+* [ ] Aggressive port scanning and service enumeration on discovered origins.
+* [ ] Subdomain enumeration via certificate transparency and DNS brute-forcing.
+* [ ] DNS zone transfer attempts (AXFR/IXFR).
+* [ ] WHOIS data extraction and registrant correlation.
+* [ ] Threat intelligence integration (Shodan, Censys, URLhaus, etc.).
+* [ ] Real-time malware/reputation checking via VirusTotal API.
+* [ ] Email harvesting from certificate transparency logs.
+* [ ] GitHub repository discovery from certificate transparency emails.
+* [ ] Hidden API endpoint discovery and mapping.
+* [ ] Advanced rate limiting evasion and anti-bot bypass techniques.
+* [ ] Session hijacking vector detection and cookie analysis.
+* [ ] DNS tunneling and covert channel detection.
+* [ ] BGP hijacking and route anomaly detection.
+* [ ] Autonomous System (AS) graph visualization and traversal.
+* [ ] Certificate pinning bypass analysis and detection.
+* [ ] Distributed scanning network support for massive scale.
+* [ ] Machine learning-based anomaly detection for origin identification.
+* [ ] Real-time threat feed integration (abuse.ch, alienvault, etc.).
+* [ ] Botnet C&C detection on discovered IPs.
+* [ ] Compromised credential checking (Have I Been Pwned integration).
+* [ ] HTTP/2 and HTTP/3 protocol analysis and fingerprinting.
+* [ ] TLS fingerprinting and JA3 hash correlation.
+* [ ] WAF bypass technique library and exploitation.
+* [ ] Reverse proxy detection and header analysis.
+* [ ] CDN evasion and de-anonymization techniques.
+* [ ] Network timing analysis for origin detection.
 
 </br>
 </br>
