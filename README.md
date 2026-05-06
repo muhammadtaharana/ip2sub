@@ -85,7 +85,7 @@ Results are streamed to the terminal in real-time and saved to `origin_results.t
 
 </br>
 
-### 6. TO-DO
+### 6. Future Enhancements.
 
 * [ ] Add JSON output format for easier integration with other tools.
 * [ ] Implement CIDR range expansion for scanning entire subnets.
